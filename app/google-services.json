@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "5176581636",
+    "firebase_url": "https://quizquotient-saya.firebaseio.com",
+    "project_id": "quizquotient-saya",
+    "storage_bucket": "quizquotient-saya.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5176581636:android:49c4fe870a00ee54",
+        "android_client_info": {
+          "package_name": "com.example.sayandeep.quizquotient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5176581636-9gsgr1psiu9qs14a35muvova2tsc786u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeaiyzZ0uJd6NRDsPvk8XAA3C8R1QzkiY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
