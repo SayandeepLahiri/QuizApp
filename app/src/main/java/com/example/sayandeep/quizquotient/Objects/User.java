@@ -1,4 +1,4 @@
-package com.example.sayandeep.quizquotient;
+package com.example.sayandeep.quizquotient.Objects;
 
 /**
  * Created by Sayandeep on 08-04-2018.
