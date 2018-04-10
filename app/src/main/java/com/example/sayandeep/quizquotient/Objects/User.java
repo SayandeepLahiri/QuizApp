@@ -7,13 +7,22 @@ package com.example.sayandeep.quizquotient.Objects;
 public class User {
     private String userName;
     private String password;
-    private String emailPhone;
+
+    private String phone;
     public User(){}
 
-    public User(String userName, String password, String emailPhone) {
+    public User(String userName, String password, String phone) {
         this.userName = userName;
         this.password = password;
-        this.emailPhone = emailPhone;
+        this.phone=phone;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getUserName() {
@@ -32,11 +41,5 @@ public class User {
         this.password = password;
     }
 
-    public String getEmailPhone() {
-        return emailPhone;
-    }
 
-    public void setEmailPhone(String emailPhone) {
-        this.emailPhone = emailPhone;
-    }
 }

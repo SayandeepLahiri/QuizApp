@@ -37,11 +37,12 @@
             app:met_singleLineEllipsis="true"
             />
 
+
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/emailPhone"
+            android:hint="@string/phone"
             android:inputType="text"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimary"

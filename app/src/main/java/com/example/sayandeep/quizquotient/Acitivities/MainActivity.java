@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -21,10 +23,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class MainActivity extends AppCompatActivity {
-    MaterialEditText edtnewPassword, edtnewUsername, edtemailPhone, edtPassword, edtuserName;
+    MaterialEditText edtnewPassword, edtnewUsername, edtPassword, edtuserName,edtPhone;
     Button signUp, signIn;
     FirebaseDatabase database;
     DatabaseReference users;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,10 +103,11 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.setMessage("Fill up the details completely");
         LayoutInflater inflater = this.getLayoutInflater();
         View signUp_layout = inflater.inflate(R.layout.signup_activity, null);
+        edtPhone=signUp_layout.findViewById(R.id.edtPhone);
 
-        edtemailPhone = signUp_layout.findViewById(R.id.edtPhone);
         edtnewUsername = signUp_layout.findViewById(R.id.edtNewUserName);
         edtnewPassword = signUp_layout.findViewById(R.id.edtNewPassword);
+
         alertDialog.setView(signUp_layout);
         alertDialog.setIcon(R.drawable.ic_account_circle_black_24dp);
         alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -115,10 +119,13 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+
                 final User user = new User(edtnewUsername.getText().toString(),
                         //Making the hash and then adding the password.
                         HashMaker.makeHash(edtnewPassword.getText().toString()),
-                        edtemailPhone.getText().toString());
+                        edtPhone.getText().toString());
                 users.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -152,4 +159,5 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
 
     }
+
 }
