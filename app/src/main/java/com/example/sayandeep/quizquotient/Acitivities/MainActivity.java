@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.sayandeep.quizquotient.Helper.HashMaker;
+import com.example.sayandeep.quizquotient.Helper.Message;
 import com.example.sayandeep.quizquotient.R;
 import com.example.sayandeep.quizquotient.Objects.User;
 import com.google.firebase.database.DataSnapshot;
@@ -59,29 +60,33 @@ public class MainActivity extends AppCompatActivity {
                     if (!userN.isEmpty()) {
                         User login = dataSnapshot.child(userN).getValue(User.class);
                         if (login.getPassword().equals(pwd)) {
-                            Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                            edtuserName.setText(null);
-                            edtPassword.setText(null);
+                            Message.makeToastMessage(getApplicationContext(),
+                                    "Login Successful", "");
+                            //Instead of setting NULL consider using this.
+                            edtuserName.getText().clear();
+                            edtPassword.getText().clear();
                         } else {
-                            Toast.makeText(MainActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
-                            edtuserName.setText(null);
-                            edtPassword.setText(null);
+                            Message.makeToastMessage(getApplicationContext(),
+                                    "Wrong Password.", "");
+                            edtuserName.getText().clear();
+                            edtPassword.getText().clear();
                         }
                     } else {
-                        Toast.makeText(MainActivity.this, "Please enter your User Name", Toast.LENGTH_SHORT).show();
-
-                        edtPassword.setText(null);
+                        Message.makeToastMessage(getApplicationContext(),
+                                "Please enter User Name", "");
+                        edtPassword.getText().clear();
                     }
                 } else {
-                    Toast.makeText(MainActivity.this, "User Name is Incorrect ", Toast.LENGTH_SHORT).show();
-                    edtuserName.setText(null);
-                    edtPassword.setText(null);
+                    Message.makeToastMessage(getApplicationContext(), "User Name is Incorrect", "");
+                    edtuserName.getText().clear();
+                    edtPassword.getText().clear();
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Message.makeToastMessage(getApplicationContext(),
+                        "Ops, Something went wrong.", "");
             }
         });
 
@@ -121,10 +126,13 @@ public class MainActivity extends AppCompatActivity {
 
 
                             if (dataSnapshot.child(user.getUserName()).exists())
-                                Toast.makeText(MainActivity.this, "User Already exists", Toast.LENGTH_SHORT).show();
+                                Message.makeToastMessage(getApplicationContext(),
+                                        "User Already exists.", "");
+
                             else {
                                 users.child(user.getUserName()).setValue(user);
-                                Toast.makeText(MainActivity.this, "User creation successful", Toast.LENGTH_SHORT).show();
+                                Message.makeToastMessage(getApplicationContext(),
+                                        "User creation successful", "");
 
                             }
                         } catch (Exception e) {
@@ -134,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
+                        Message.makeToastMessage(getApplicationContext(),
+                                "Ops, Something went wrong.", "");
                     }
                 });
                 dialogInterface.dismiss();
