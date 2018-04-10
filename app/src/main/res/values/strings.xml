@@ -9,4 +9,9 @@
     <string name="RequestOtp">Request OTP</string>
     <string name="SendOTP">Send OTP</string>
     <string name="HintOTP">Enter the OTP</string>
+    <string name="Menu1">Category</string>
+    <string name="Menu2">Ranking</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
