@@ -12,4 +12,6 @@
     <string name="resendOTP">Resend OTP</string>
     <string name="invalidPhone">Invalid Phone Number</string>
     <string name="invalidOTP">Invalid OTP</string>
+    <string name="Menu1">Category</string>
+    <string name="Menu2">Ranking</string>
 </resources>
