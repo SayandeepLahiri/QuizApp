@@ -7,6 +7,8 @@
     <string name="SignUp">Sign Up</string>
     <string name="SignIn">Sign In</string>
     <string name="RequestOtp">Request OTP</string>
-    <string name="SendOTP">Send OTP</string>
+    <string name="SendOTP">Confirm OTP</string>
     <string name="HintOTP">Enter the OTP</string>
+    <string name="resendOTP">Resend OTP</string>
+    <string name="invalidPhone">Invalid Phone Number</string>
 </resources>

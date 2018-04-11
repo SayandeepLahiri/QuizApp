@@ -51,7 +51,7 @@
             app:met_floatingLabel="highlight"
             app:met_primaryColor="@color/colorPrimary"
             app:met_singleLineEllipsis="true" />
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_request_otp"
@@ -68,10 +68,10 @@
             app:met_primaryColor="@color/colorPrimary"
             app:met_singleLineEllipsis="true"
             android:hint="@string/HintOTP"/>
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_send_otp"
+            android:id="@+id/btn_confirm_otp"
             android:text="@string/SendOTP"
             style="@style/Widget.AppCompat.Button.Small"
             android:background="@color/colorPrimary"/>
