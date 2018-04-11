@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class MainActivity extends AppCompatActivity {
-    MaterialEditText edtnewPassword, edtnewUsername, edtPassword, edtuserName,edtPhone;
+    MaterialEditText edtnewPassword, edtnewUsername, edtPassword, edtuserName, edtPhone;
     Button signUp, signIn;
     FirebaseDatabase database;
     DatabaseReference users;
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.setMessage("Fill up the details completely");
         LayoutInflater inflater = this.getLayoutInflater();
         View signUp_layout = inflater.inflate(R.layout.signup_activity, null);
-        edtPhone=signUp_layout.findViewById(R.id.edtPhone);
+        edtPhone = signUp_layout.findViewById(R.id.edtPhone);
 
         edtnewUsername = signUp_layout.findViewById(R.id.edtNewUserName);
         edtnewPassword = signUp_layout.findViewById(R.id.edtNewPassword);
@@ -120,8 +120,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
-
                 final User user = new User(edtnewUsername.getText().toString(),
                         //Making the hash and then adding the password.
                         HashMaker.makeHash(edtnewPassword.getText().toString()),
@@ -157,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         alertDialog.show();
-
     }
 
 }
