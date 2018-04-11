@@ -11,4 +11,5 @@
     <string name="HintOTP">Enter the OTP</string>
     <string name="resendOTP">Resend OTP</string>
     <string name="invalidPhone">Invalid Phone Number</string>
+    <string name="invalidOTP">Invalid OTP</string>
 </resources>
