@@ -2,6 +2,7 @@ package com.example.sayandeep.quizquotient.Acitivities;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 
 
 import com.example.sayandeep.quizquotient.Helper.CategoryViewHolder;
+import com.example.sayandeep.quizquotient.Helper.Constants;
 import com.example.sayandeep.quizquotient.Helper.Message;
 import com.example.sayandeep.quizquotient.Interface.ItemClickListener;
 import com.example.sayandeep.quizquotient.Objects.Category;
@@ -50,7 +52,10 @@ public class CategoryFragment extends Fragment {
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Message.makeToastMessage(getActivity(),String.format("%s|%s",adapter.getRef(position).getKey()),"");
+                        Intent startGame=new Intent(getActivity(),StartActivity.class);
+                        Constants.categoryId=adapter.getRef(position).getKey();
+                        startActivity(startGame);
+
                     }
                 });
             }
