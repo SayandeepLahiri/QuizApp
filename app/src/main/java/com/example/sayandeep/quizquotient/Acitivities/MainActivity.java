@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signUpDialog();
+
             }
         });
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -98,66 +98,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void signUpDialog() {
-
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-
-        alertDialog.setTitle("Sign Up");
-        alertDialog.setMessage("Fill up the details completely");
-        LayoutInflater inflater = this.getLayoutInflater();
-        View signUp_layout = inflater.inflate(R.layout.signup_activity, null);
-        edtPhone = signUp_layout.findViewById(R.id.edtPhone);
-
-        edtnewUsername = signUp_layout.findViewById(R.id.edtNewUserName);
-        edtnewPassword = signUp_layout.findViewById(R.id.edtNewPassword);
-
-        alertDialog.setView(signUp_layout);
-        alertDialog.setIcon(R.drawable.ic_account_circle_black_24dp);
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-                final User user = new User(edtnewUsername.getText().toString(),
-                        //Making the hash and then adding the password.
-                        HashMaker.makeHash(edtnewPassword.getText().toString()),
-                        edtPhone.getText().toString());
-                users.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        try {
-
-
-                            if (dataSnapshot.child(user.getUserName()).exists())
-                                Message.makeToastMessage(getApplicationContext(),
-                                        "User Already exists.", "");
-
-                            else {
-                                users.child(user.getUserName()).setValue(user);
-                                Message.makeToastMessage(getApplicationContext(),
-                                        "User creation successful", "");
-
-                            }
-                        } catch (Exception e) {
-                            e.getMessage();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Message.makeToastMessage(getApplicationContext(),
-                                "Ops, Something went wrong.", "");
-                    }
-                });
-                dialogInterface.dismiss();
-            }
-        });
-        alertDialog.show();
-    }
 
 }

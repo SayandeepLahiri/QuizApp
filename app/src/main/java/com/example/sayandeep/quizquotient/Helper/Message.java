@@ -4,11 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-/**
- * Created by mukhe on 10-Apr-18.
- * This is the class to make the Toast or the Log Message.
- */
-
 public class Message {
     /**
      * This is the method to make the Toast message for the app.
