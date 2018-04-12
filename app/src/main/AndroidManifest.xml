@@ -20,7 +20,8 @@
         <activity
             android:name=".Acitivities.SignUpActivity"
             android:parentActivityName=".Acitivities.MainActivity" />
-        <activity android:name=".Acitivities.StartActivity"></activity>
+        <activity android:name=".Acitivities.StartActivity" />
+        <activity android:name=".Acitivities.PlayingActivity"></activity>
     </application>
 
 </manifest>
