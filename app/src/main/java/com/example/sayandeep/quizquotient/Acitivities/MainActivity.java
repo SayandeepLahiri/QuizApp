@@ -1,17 +1,13 @@
 package com.example.sayandeep.quizquotient.Acitivities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.example.sayandeep.quizquotient.Helper.Constants;
 import com.example.sayandeep.quizquotient.Helper.HashMaker;
 import com.example.sayandeep.quizquotient.Helper.Message;
 import com.example.sayandeep.quizquotient.R;
@@ -24,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class MainActivity extends AppCompatActivity {
-    MaterialEditText edtnewPassword, edtnewUsername, edtPassword, edtuserName, edtPhone;
+    MaterialEditText edtPassword, edtUserName;
     Button signUp, signIn;
     FirebaseDatabase database;
     DatabaseReference users;
@@ -33,24 +29,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (isSignedIn()) {
+            changeActivity();
+        }
         setContentView(R.layout.activity_main);
         database = FirebaseDatabase.getInstance();
         users = database.getReference("Users");
 
         edtPassword = findViewById(R.id.edtPassword);
-        edtuserName = findViewById(R.id.edtUserName);
+        edtUserName = findViewById(R.id.edtUserName);
         signIn = findViewById(R.id.btn_sign_in);
         signUp = findViewById(R.id.btn_sign_up);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                signUp();
             }
         });
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signIn(edtuserName.getText().toString(),
+                signIn(edtUserName.getText().toString(),
                         HashMaker.makeHash(edtPassword.getText().toString()));
             }
         });
@@ -64,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
                     if (!userN.isEmpty()) {
                         User login = dataSnapshot.child(userN).getValue(User.class);
                         if (login.getPassword().equals(pwd)) {
-                            edtuserName.getText().clear();
+                            edtUserName.getText().clear();
                             edtPassword.getText().clear();
-                            Intent homeActivity=new Intent(MainActivity.this,HomeActivity.class);
+                            Intent homeActivity = new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(homeActivity);
                             finish();
 
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             Message.makeToastMessage(getApplicationContext(),
                                     "Wrong Password.", "");
-                            edtuserName.getText().clear();
+                            edtUserName.getText().clear();
                             edtPassword.getText().clear();
                         }
                     } else {
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } else {
                     Message.makeToastMessage(getApplicationContext(), "User Name is Incorrect", "");
-                    edtuserName.getText().clear();
+                    edtUserName.getText().clear();
                     edtPassword.getText().clear();
                 }
             }
@@ -97,9 +96,46 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    private void signUp(){
 
+    private void signUp() {
+        Intent signUpIntent = new Intent(MainActivity.this, SignUpActivity.class);
+        startActivityForResult(signUpIntent, Constants.SIGNUP_CODE);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.SIGNUP_CODE) {
+            if (resultCode == RESULT_OK) {
+                //Putting the status to the Shared Preferences.
+                SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean(Constants.LOGIN_STATUS, true);
+                editor.apply();
+                changeActivity();
+            } else {
+                Message.makeToastMessage(getApplicationContext(),
+                        "Please signup.",
+                        "");
+            }
+        }
+    }
 
+    /**
+     * This is the method to change the current activity to the HOME ACTIVITY.
+     */
+    private void changeActivity() {
+        Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
+        startActivity(homeIntent);
+    }
+
+    /**
+     * This is the method to check the sign in status.
+     *
+     * @return: true if signed in, else false.
+     */
+    private boolean isSignedIn() {
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        Constants.IS_LOGGED_IN = sharedPreferences.getBoolean(Constants.LOGIN_STATUS, false);
+        return Constants.IS_LOGGED_IN;
+    }
 }
