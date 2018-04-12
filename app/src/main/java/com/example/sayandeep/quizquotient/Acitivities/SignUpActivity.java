@@ -1,5 +1,7 @@
 package com.example.sayandeep.quizquotient.Acitivities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +9,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.example.sayandeep.quizquotient.Helper.Constants;
 import com.example.sayandeep.quizquotient.Helper.Message;
 import com.example.sayandeep.quizquotient.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,7 +32,8 @@ public class SignUpActivity extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken forceResendingToken;
     private boolean isVerificationInProgress = false;
     private int TIME_OUT = 60;
-    private String mVerificationId;
+    private String mVerificationId=String.valueOf(Constants.VERIFICATION_CODE);
+    private boolean isResend=false;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -46,8 +50,13 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!isNotNull(_userName, _password, _phoneNumber)) {
-                    requestOTP.setText(getResources().getString(R.string.resendOTP));
-                    sendRequestOTP();
+                    if(!isResend) {
+                        requestOTP.setText(getResources().getString(R.string.resendOTP));
+                        sendRequestOTP();
+                    }
+                    else{
+                        resendRequestOTP(forceResendingToken);
+                    }
                 } else
                     Message.makeToastMessage(getApplicationContext(),
                             "Please fill in all the details first",
@@ -129,10 +138,12 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //TODO:SIGN IN Complete.
+                            setResult(RESULT_OK);
+                            finish();
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 _otp.setError(getResources().getString(R.string.invalidOTP));
+                                setResult(RESULT_CANCELED);
                             }
                         }
                     }
