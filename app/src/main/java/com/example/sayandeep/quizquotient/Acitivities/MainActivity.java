@@ -1,6 +1,7 @@
 package com.example.sayandeep.quizquotient.Acitivities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -63,11 +64,13 @@ public class MainActivity extends AppCompatActivity {
                     if (!userN.isEmpty()) {
                         User login = dataSnapshot.child(userN).getValue(User.class);
                         if (login.getPassword().equals(pwd)) {
-                            Message.makeToastMessage(getApplicationContext(),
-                                    "Login Successful", "");
-                            //Instead of setting NULL consider using this.
                             edtuserName.getText().clear();
                             edtPassword.getText().clear();
+                            Intent homeActivity=new Intent(MainActivity.this,HomeActivity.class);
+                            startActivity(homeActivity);
+                            finish();
+
+
                         } else {
                             Message.makeToastMessage(getApplicationContext(),
                                     "Wrong Password.", "");
