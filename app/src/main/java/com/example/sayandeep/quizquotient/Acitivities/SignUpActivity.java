@@ -1,7 +1,5 @@
 package com.example.sayandeep.quizquotient.Acitivities;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,16 +30,16 @@ public class SignUpActivity extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken forceResendingToken;
     private boolean isVerificationInProgress = false;
     private int TIME_OUT = 60;
-    private String mVerificationId=String.valueOf(Constants.VERIFICATION_CODE);
-    private boolean isResend=false;
+    private String mVerificationId = String.valueOf(Constants.VERIFICATION_CODE);
+    private boolean isResend = false;
     private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_activity);
-        _userName = findViewById(R.id.edtUserName);
-        _password = findViewById(R.id.edtPassword);
+        _userName = findViewById(R.id.edtNewUserName);
+        _password = findViewById(R.id.edtNewPassword);
         _phoneNumber = findViewById(R.id.edtPhone);
         _otp = findViewById(R.id.edtOTP);
         requestOTP = findViewById(R.id.btn_request_otp);
@@ -50,11 +48,10 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!isNotNull(_userName, _password, _phoneNumber)) {
-                    if(!isResend) {
+                    if (!isResend) {
                         requestOTP.setText(getResources().getString(R.string.resendOTP));
                         sendRequestOTP();
-                    }
-                    else{
+                    } else {
                         resendRequestOTP(forceResendingToken);
                     }
                 } else
@@ -108,9 +105,13 @@ public class SignUpActivity extends AppCompatActivity {
      * @return: Return false if NOT NULL, else return TRUE.
      */
     private boolean isNotNull(MaterialEditText... editTexts) {
-        for (MaterialEditText editText : editTexts) {
-            if (TextUtils.isEmpty(editText.getText().toString()))
-                return true;
+        try {
+            for (MaterialEditText editText : editTexts)
+                if (TextUtils.isEmpty(editText.getText().toString()))
+                    return true;
+        } catch (Exception e) {
+            Message.makeLogMessages(CLASS_TAG, e.toString());
+            return true;
         }
         return false;
     }
