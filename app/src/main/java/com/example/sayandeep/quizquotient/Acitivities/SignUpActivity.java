@@ -30,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean isVerificationInProgress = false;
     private int TIME_OUT = 60;
     private String mVerificationId;
+    private boolean isResend=false;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -46,8 +47,13 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!isNotNull(_userName, _password, _phoneNumber)) {
-                    requestOTP.setText(getResources().getString(R.string.resendOTP));
-                    sendRequestOTP();
+                    if(!isResend) {
+                        requestOTP.setText(getResources().getString(R.string.resendOTP));
+                        sendRequestOTP();
+                    }
+                    else{
+                        resendRequestOTP(forceResendingToken);
+                    }
                 } else
                     Message.makeToastMessage(getApplicationContext(),
                             "Please fill in all the details first",
