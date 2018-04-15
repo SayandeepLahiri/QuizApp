@@ -17,5 +17,11 @@
     <string name="Category">Category</string>
     <string name="Fragment">Blank</string>
     <string name="Play">Play</string>
+    <string name="Playtext">0</string>
+    <string name="PlayQuestion">1/30</string>
+    <string name="AnsA">Answer A</string>
+    <string name="AnsB">Answer B</string>
+    <string name="AnsC">Answer C</string>
+    <string name="AnsD">Answer D</string>
 
 </resources>
