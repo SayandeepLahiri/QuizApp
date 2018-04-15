@@ -15,6 +15,7 @@ import com.example.sayandeep.quizquotient.Objects.Done;
 import com.example.sayandeep.quizquotient.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
 
@@ -82,6 +83,55 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
         {
             thisQuestion++;
             txtQuestionNum.setText(String.format(Locale.getDefault(),"%d / %d",thisQuestion,totalQuestions) );
+            progressBar.setProgress(0);
+            progressValue=0;
+            if(Constants.questionsList.get(index).getIsImageQuestion().equals("true"))
+            {
+                Picasso.with(getBaseContext()).load(Constants.questionsList.get(index).getQuestion()).into(question_image);
+                question_image.setVisibility(View.VISIBLE);
+                question_text.setVisibility(View.INVISIBLE);
+            }
+            else
+            {
+                question_text.setVisibility(View.VISIBLE);
+                question_image.setVisibility(View.INVISIBLE);
+                btnA.setText(Constants.questionsList.get(index).getAnswerA());
+                btnB.setText(Constants.questionsList.get(index).getAnswerB());
+                btnC.setText(Constants.questionsList.get(index).getAnswerC());
+                btnD.setText(Constants.questionsList.get(index).getAnswerD());
+                mCountDown.start();
+            }
         }
+        else
+        {
+            Intent intent=new Intent(this, Done.class);
+            Bundle dataSend=new Bundle();
+            dataSend.putInt("Score",score);
+            dataSend.putInt("Total",totalQuestions);
+            dataSend.putInt("Correct",correctAnswer);
+            intent.putExtras(dataSend);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        totalQuestions=Constants.questionsList.size();
+        mCountDown=new CountDownTimer(Constants.TIMEOUT,Constants.INTERVAL) {
+            @Override
+            public void onTick(long millisec) {
+                progressBar.setProgress(progressValue);
+                progressValue++;
+            }
+
+            @Override
+            public void onFinish() {
+               mCountDown.cancel();
+                showQuestion(++index);
+
+            }
+        };showQuestion(++index);
     }
 }
