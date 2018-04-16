@@ -21,7 +21,8 @@
             android:name=".Acitivities.SignUpActivity"
             android:parentActivityName=".Acitivities.MainActivity" />
         <activity android:name=".Acitivities.StartActivity" />
-        <activity android:name=".Acitivities.PlayingActivity"></activity>
+        <activity android:name=".Acitivities.PlayingActivity" />
+        <activity android:name=".Acitivities.Done"></activity>
     </application>
 
 </manifest>

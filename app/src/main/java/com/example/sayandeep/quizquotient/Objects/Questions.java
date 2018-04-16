@@ -5,17 +5,17 @@ package com.example.sayandeep.quizquotient.Objects;
  */
 
 public class Questions {
-    private  String Question,AnswerA,AnswerB,AnswerC,AnswerD,CorrectAnswer,categoryId,isImageQuestion;
+    private  String Question,AnswerA,AnswerB,AnswerC,AnswerD,CorrectAnswer,CategoryId,IsImageQuestion;
 
-    public Questions(String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String categoryId, String isImageQuestion) {
+    public Questions(String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String CategoryId, String isImageQuestion) {
         Question = question;
         AnswerA = answerA;
         AnswerB = answerB;
         AnswerC = answerC;
         AnswerD = answerD;
         CorrectAnswer = correctAnswer;
-        this.categoryId = categoryId;
-        this.isImageQuestion = isImageQuestion;
+        this.CategoryId = CategoryId;
+        this.IsImageQuestion = isImageQuestion;
     }
 
     public String getQuestion() {
@@ -67,18 +67,18 @@ public class Questions {
     }
 
     public String getCategoryId() {
-        return categoryId;
+        return CategoryId;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryId(String CategoryId) {
+        this.CategoryId = CategoryId;
     }
 
     public String getIsImageQuestion() {
-        return isImageQuestion;
+        return IsImageQuestion;
     }
 
-    public void setIsImageQuestion(String isImageQuestion) {
-        this.isImageQuestion = isImageQuestion;
+    public void setIsImageQuestion(String IsImageQuestion) {
+        this.IsImageQuestion = IsImageQuestion;
     }
 }

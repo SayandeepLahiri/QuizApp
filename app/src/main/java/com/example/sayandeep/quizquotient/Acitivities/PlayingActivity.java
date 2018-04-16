@@ -11,7 +11,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.sayandeep.quizquotient.Helper.Constants;
-import com.example.sayandeep.quizquotient.Objects.Done;
 import com.example.sayandeep.quizquotient.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -22,8 +21,8 @@ import java.util.Locale;
 public class PlayingActivity extends AppCompatActivity implements View.OnClickListener{
     CountDownTimer mCountDown;
     int index=0,score=0,thisQuestion=0,totalQuestions,correctAnswer,progressValue=0;
-    FirebaseDatabase database;
-    DatabaseReference questions;
+ /*   FirebaseDatabase database;
+    DatabaseReference questions;*/
     ProgressBar progressBar;
     Button btnA,btnB,btnC,btnD;
     TextView question_text,txtScore,txtQuestionNum;
@@ -32,8 +31,8 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playing);
-        database=FirebaseDatabase.getInstance();
-        questions=database.getReference("Questions");
+       // database=FirebaseDatabase.getInstance();
+      //  questions=database.getReference("Questions");
         progressBar=findViewById(R.id.progressBar);
         question_text=findViewById(R.id.question_text);
         txtQuestionNum=findViewById(R.id.txtQuestionNum);
@@ -121,7 +120,7 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
         totalQuestions=Constants.questionsList.size();
         mCountDown=new CountDownTimer(Constants.TIMEOUT,Constants.INTERVAL) {
             @Override
-            public void onTick(long millisec) {
+            public void onTick(long milliSec) {
                 progressBar.setProgress(progressValue);
                 progressValue++;
             }
@@ -132,6 +131,6 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
                 showQuestion(++index);
 
             }
-        };showQuestion(++index);
+        };showQuestion(index);
     }
 }

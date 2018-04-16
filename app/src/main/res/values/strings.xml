@@ -23,5 +23,7 @@
     <string name="AnsB">Answer B</string>
     <string name="AnsC">Answer C</string>
     <string name="AnsD">Answer D</string>
-
+<string name="DoneScore">Score : 0</string>
+    <string name="Pass">Passed :0/30</string>
+    <string name="TryAgain">Try Again</string>
 </resources>
