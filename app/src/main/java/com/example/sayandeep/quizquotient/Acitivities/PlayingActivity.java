@@ -11,9 +11,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.sayandeep.quizquotient.Helper.Constants;
+
 import com.example.sayandeep.quizquotient.R;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
@@ -21,8 +24,8 @@ import java.util.Locale;
 public class PlayingActivity extends AppCompatActivity implements View.OnClickListener{
     CountDownTimer mCountDown;
     int index=0,score=0,thisQuestion=0,totalQuestions,correctAnswer,progressValue=0;
- /*   FirebaseDatabase database;
-    DatabaseReference questions;*/
+   FirebaseDatabase database;
+    DatabaseReference questions;
     ProgressBar progressBar;
     Button btnA,btnB,btnC,btnD;
     TextView question_text,txtScore,txtQuestionNum;
@@ -31,8 +34,8 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playing);
-       // database=FirebaseDatabase.getInstance();
-      //  questions=database.getReference("Questions");
+        database=FirebaseDatabase.getInstance();
+       questions=database.getReference("Questions");
         progressBar=findViewById(R.id.progressBar);
         question_text=findViewById(R.id.question_text);
         txtQuestionNum=findViewById(R.id.txtQuestionNum);
@@ -94,12 +97,15 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
             {
                 question_text.setVisibility(View.VISIBLE);
                 question_image.setVisibility(View.INVISIBLE);
+
+
+            }
                 btnA.setText(Constants.questionsList.get(index).getAnswerA());
                 btnB.setText(Constants.questionsList.get(index).getAnswerB());
                 btnC.setText(Constants.questionsList.get(index).getAnswerC());
                 btnD.setText(Constants.questionsList.get(index).getAnswerD());
                 mCountDown.start();
-            }
+
         }
         else
         {

@@ -1,6 +1,7 @@
 package com.example.sayandeep.quizquotient.Acitivities;
 
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 
+import com.example.sayandeep.quizquotient.Helper.CategoryViewHolder;
 import com.example.sayandeep.quizquotient.R;
 
 public class HomeActivity extends AppCompatActivity {
@@ -27,12 +29,14 @@ public class HomeActivity extends AppCompatActivity {
                 switch(item.getItemId())
                 {
                     case R.id.action_category: selectedFragment=CategoryFragment.newInstance();break;
-                    case R.id.action_ranking:selectedFragment=RankingFragment.newInstance();break;
-                } FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+                    case R.id.action_ranking: selectedFragment=RankingFragment.newInstance();break;
+                }
+                FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout,selectedFragment);
                 transaction.commit();
                 return true;
             }
+
 
         });setDefaultFragment();
     }

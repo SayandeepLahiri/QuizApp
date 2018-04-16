@@ -6,6 +6,7 @@ package com.example.sayandeep.quizquotient.Objects;
 
 public class Questions {
     private  String Question,AnswerA,AnswerB,AnswerC,AnswerD,CorrectAnswer,CategoryId,IsImageQuestion;
+    public Questions(){}
 
     public Questions(String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String CategoryId, String isImageQuestion) {
         Question = question;

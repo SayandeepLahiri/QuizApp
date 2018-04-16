@@ -112,15 +112,17 @@
                 android:text="@string/PlayQuestion"
                 android:textColor="#fff"
                 android:textSize="36sp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:max="5" />
         </LinearLayout>
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:max="5"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
 
 
         </LinearLayout>
