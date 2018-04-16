@@ -9,6 +9,7 @@
     tools:context="com.example.sayandeep.quizquotient.Acitivities.HomeActivity">
     <FrameLayout
         android:id="@+id/frame_layout"
+        android:animateLayoutChanges="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/navigation"/>

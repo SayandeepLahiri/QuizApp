@@ -2,11 +2,13 @@ package com.example.sayandeep.quizquotient.Acitivities;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 
 
 import com.example.sayandeep.quizquotient.Helper.CategoryViewHolder;
+import com.example.sayandeep.quizquotient.Helper.Constants;
 import com.example.sayandeep.quizquotient.Helper.Message;
 import com.example.sayandeep.quizquotient.Interface.ItemClickListener;
 import com.example.sayandeep.quizquotient.Objects.Category;
@@ -29,13 +32,14 @@ public class CategoryFragment extends Fragment {
     RecyclerView listCategory;
     RecyclerView.LayoutManager layoutManager;
     FirebaseRecyclerAdapter<Category,CategoryViewHolder> adapter;
+
     FirebaseDatabase database;
     DatabaseReference categories;
     public static CategoryFragment newInstance() {
         CategoryFragment categoryFragment = new CategoryFragment();
         return categoryFragment;
     }
-    private void placeHolder()
+    private void loadCategories()
     {
         adapter=new FirebaseRecyclerAdapter<Category, CategoryViewHolder>(Category.class,
                 R.layout.category_layout,
@@ -50,7 +54,10 @@ public class CategoryFragment extends Fragment {
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Message.makeToastMessage(getActivity(),String.format("%s|%s",adapter.getRef(position).getKey()),"");
+                        Intent startGame=new Intent(getActivity(),StartActivity.class);
+                        Constants.categoryId=adapter.getRef(position).getKey();
+                        startActivity(startGame);
+
                     }
                 });
             }
@@ -72,7 +79,12 @@ public class CategoryFragment extends Fragment {
         myFragment=inflater.inflate(R.layout.fragment_category,container,false);
         listCategory=myFragment.findViewById(R.id.listCategory);
         listCategory.setHasFixedSize(true);
+        layoutManager=new LinearLayoutManager(container.getContext());
         listCategory.setLayoutManager(layoutManager);
+        loadCategories();
         return myFragment;
     }
-}
+
+
+
+    }

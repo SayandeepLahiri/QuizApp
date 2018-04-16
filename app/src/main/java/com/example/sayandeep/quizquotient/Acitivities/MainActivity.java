@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                         if (login.getPassword().equals(pwd)) {
                             edtUserName.getText().clear();
                             edtPassword.getText().clear();
+                            Constants.currentUser=login;
                             Intent homeActivity = new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(homeActivity);
                             finish();
